@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>www.robertocomercial.com</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #000;
+            padding: 10px;
+            z-index: 1000;
+        }
+
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 100%;
+            height: 4px;
+            background-color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        /* Menu Lateral */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            transition: left 0.3s ease;
+            z-index: 999;
+        }
+
+        .side-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .side-menu ul li {
+            padding: 20px;
+            border-bottom: 1px solid #444;
+        }
+
+        .side-menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.125rem;
+            display: block;
+        }
+
+        .side-menu.active {
+            left: 0;
+        }
+
+        /* Seções */
+        section {
+            padding: 40px 20px;
+            text-align: center;
+            transition: padding 0.3s ease;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            color: #FFD700;
+        }
+
+        section p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            margin-top: 80px;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        /* Produtos */
+        .products {
+            background-color: #222;
+        }
+
+        .product-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .product-item {
+            background-color: #444;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .product-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+
+        .product-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Blog */
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .blog-post {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .blog-post:hover {
+            background-color: #555;
+        }
+
+        /* Contato */
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .contact-form button {
+            background-color: #FFD700;
+            color: #000;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.125rem;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #ffcc00;
+        }
+
+        /* Depoimentos */
+        .testimonials {
+            background-color: #222;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            font-size: 2.5em;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .testimonial-item {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 8px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .hero h1 {
+    font-size: 2.5em; /* Diminuí o tamanho da fonte */
+    margin: 0;
+}
+
+        .testimonial-item:hover {
+            transform: scale(1.05);
+            background-color: #555;
+        }
+
+        .testimonial-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-item h4 {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .testimonial-item p {
+            font-size: 1rem;
+            margin-top: 10px;
+            color: #ccc;
+        }
+
+        /* Formulário de Avaliação */
+        .review-form {
+            background-color: #333;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .review-form h2 {
+            font-size: 2.5em;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .review-form form input,
+        .review-form form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .review-form form button {
+            background-color: #FFD700;
+            color: #000;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.125rem;
+            transition: background-color 0.3s;
+        }
+
+        .review-form form button:hover {
+            background-color: #ffcc00;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #000;
+            color: #fff;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #FFD700;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .product-item,
+            .testimonial-item {
+                width: 80%;
+            }
+
+            .side-menu {
+                width: 200px;
+            }
+
+            section {
+                padding: 20px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Menu Hambúrguer -->
+    <header>
+        <div class="menu-toggle" id="menu-toggle" aria-label="Abrir/Fechar Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </header>
+
+    <!-- Menu Lateral -->
+    <nav id="side-menu" class="side-menu" aria-labelledby="menu-toggle">
+        <ul>
+            <li><a href="#home">Início</a></li>
+            <li><a href="#about">Sobre Nós</a></li>
+            <li><a href="#products">Produtos</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contato</a></li>
+            <li><a href="#testimonials">Depoimentos</a></li>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <section id="home" class="hero">
+            <h1>Bem-vindo ao Roberto Comercial</h1>
+            <p>Transformando suas ideias em soluções inovadoras!</p>
+        </section>
+
+        <section id="about">
+            <h2>Sobre Nós</h2>
+            <p>A Roberto Comercial é uma empresa especializada em fornecer soluções inovadoras no mercado. Trabalhamos com
+                produtos de alta qualidade e atendimento personalizado para atender suas necessidades.</p>
+        </section>
+
+        <section id="products" class="products">
+            <h2>Produtos</h2>
+            <div class="product-list">
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/250" alt="Produto 1">
+                    <h3>Produto 1</h3>
+                    <p>Descrição do produto 1.</p>
+                </div>
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/250" alt="Produto 2">
+                    <h3>Produto 2</h3>
+                    <p>Descrição do produto 2.</p>
+                </div>
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/250" alt="Produto 3">
+                    <h3>Produto 3</h3>
+                    <p>Descrição do produto 3.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Depoimentos -->
+        <section id="testimonials" class="testimonials">
+            <h2>O que nossos clientes dizem</h2>
+            <div class="testimonial-list">
+                <div class="testimonial-item">
+                    <img src="https://via.placeholder.com/80" alt="Cliente 1">
+                    <p>"Comprei produtos incríveis no Roberto Comercial. A entrega foi rápida e o atendimento, excelente!"</p>
+                    <h4>João Silva</h4>
+                    <p>Cliente satisfeito</p>
+                </div>
+                <div class="testimonial-item">
+                    <img src="https://via.placeholder.com/80" alt="Cliente 2">
+                    <p>"Fiquei muito feliz com a qualidade dos produtos! Super recomendo." </p>
+                    <h4>Maria Oliveira</h4>
+                    <p>Cliente fiel</p>
+                </div>
+                <div class="testimonial-item">
+                    <img src="https://via.placeholder.com/80" alt="Cliente 3">
+                    <p>"O site é super fácil de usar e encontrei tudo o que precisava. Com certeza comprarei novamente!"</p>
+                    <h4>Carlos Souza</h4>
+                    <p>Cliente satisfeito</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulário de Avaliação -->
+        <section id="review-form" class="review-form">
+            <h2>Deixe seu depoimento</h2>
+            <form action="#">
+                <input type="text" placeholder="Seu nome" required>
+                <textarea placeholder="Deixe seu comentário" required></textarea>
+                <button type="submit">Enviar Avaliação</button>
+            </form>
+        </section>
+
+        <!-- Seção de Contato -->
+        <section id="contact" class="contact">
+            <h2>Contato</h2>
+            <form class="contact-form">
+                <input type="text" placeholder="Seu nome" required>
+                <input type="email" placeholder="Seu e-mail" required>
+                <textarea placeholder="Sua mensagem" required></textarea>
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Roberto Comercial | Todos os direitos reservados.</p>
+        <p><a href="mailto:contato@robertocomercial.com">contato@robertocomercial.com</a></p>
+        <p>Telefone: +244 92541-1205</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/robertocomercial" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/robertocomercial" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com/robertocomercial" target="_blank" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/robertocomercial" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://wa.me/244925411205" target="_blank" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Evento para abrir/fechar o menu lateral
+        const menuToggle = document.getElementById("menu-toggle");
+        const sideMenu = document.getElementById("side-menu");
+
+        menuToggle.addEventListener("click", function () {
+            sideMenu.classList.toggle("active");
+        });
+    </script>
+</body>
+
+</html>
